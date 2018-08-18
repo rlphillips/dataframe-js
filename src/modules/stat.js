@@ -131,6 +131,12 @@ class Stat {
     sd(columnName, population = false) {
         return Math.sqrt(this.var(columnName, population));
     }
+	
+	unique() {
+		let set = new Set();
+		this.df.forEach(row => set.add(row.get(columnName)))
+		return [...set].length
+	}
 
     /**
      * Compute all the stats available with the Stat module on a numeric column.
@@ -148,7 +154,8 @@ class Stat {
             var: this.var(columnName),
             varpop: this.var(columnName, true),
             sd: this.sd(columnName),
-            sdpop: this.sd(columnName, true)
+            sdpop: this.sd(columnName, true),
+			unique: this.unique(columnName)
         };
     }
 }
